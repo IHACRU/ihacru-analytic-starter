@@ -9,14 +9,20 @@
 
 # We will use the list object `l_support` to accrue all relevant objects for display production
 
+# ----- function-prepare-data ---------------
 # enter data description here
 prepare_data_code_name <- function(
   d_input
   ,...
 ){ 
   # values for testing
-  
+  d_input <- ds_total
   # support functions
+  
+  d1 <- d_input
+  
+  l_support <- list()
+  l_support[["dataframe"]] <- d1
   
   return(l_support)
 } # how to use:
@@ -26,16 +32,19 @@ l_support <- ds_input %>%
     ...
 )
 
+# ----- function-make-plot ---------------
 # enter plot description here
 make_plot_code_name <- function(
   l_support
 ){
   
   # get data frame from the support object
-  d1 <- l_support$df
+  d1 <- l_support[["dataframe"]]
   
   # script the plot
-  g1 <- ggplot2::ggplot()  
+  g1 <- d1 %>% 
+    ggplot2::ggplot()  
+  # add layers
   g2 <- g1 + theme()
   
   # add the plot to the support object 
@@ -50,8 +59,7 @@ l_support <- ds_input %>%
   prepare_data_code_name(...) %>%
   make_plot_code_name(...)
 
-
-
+# ----- function-print-plot ---------------
 print_plot_code_name <- function(
   l_support
   ,path_output_folder = "./reports/report-code-name/prints/"
